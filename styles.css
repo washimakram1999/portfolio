@@ -242,12 +242,13 @@ body {
 .hero-text {
   flex: 1;
   text-align: left;
+  min-width: 0;
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   font-weight: 800;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   line-height: 1.2;
 }
 
@@ -263,17 +264,17 @@ body {
 }
 
 .hero-subtitle {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: var(--accent-color);
   margin-bottom: 1rem;
 }
 
 .hero-description {
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   color: var(--text-secondary);
   margin-bottom: 2rem;
-  white-space: nowrap;
+  line-height: 1.6;
 }
 
 .hero-buttons {
@@ -340,64 +341,120 @@ body {
   border: 2px solid transparent;
 }
 
-.floating-icons {
+.hero-image-container {
   position: relative;
-  width: 400px;
-  height: 400px;
+  width: 440px;
+  height: 440px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.profile-frame {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  padding: 6px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color),
+    var(--accent-color)
+  );
+  box-shadow:
+    0 0 35px rgba(99, 102, 241, 0.4),
+    0 0 70px rgba(236, 72, 153, 0.2);
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: profileGlow 4s infinite alternate;
+}
+
+@keyframes profileGlow {
+  0% {
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.4), 0 0 60px rgba(236, 72, 153, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(99, 102, 241, 0.7), 0 0 90px rgba(20, 184, 166, 0.5);
+  }
+}
+
+.profile-frame:hover {
+  transform: scale(1.04);
+}
+
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--background);
+  display: block;
+}
+
+.floating-icons {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 3;
 }
 
 .float-icon {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   background: var(--surface-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-primary);
-  font-size: 2rem;
+  font-size: 1.8rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   animation: float 6s ease-in-out infinite;
+  pointer-events: auto;
 }
 
-/* Different delays and positions for each icon */
+/* Position floating icons in an outer orbit around the photo */
 .float-icon-1 {
-  top: 10%;
-  left: 50%;
+  top: 2%;
+  left: 42%;
   animation-delay: 0s;
 }
 .float-icon-2 {
-  top: 40%;
-  left: 10%;
+  top: 22%;
+  left: 2%;
   animation-delay: 1s;
 }
 .float-icon-3 {
-  top: 70%;
-  left: 40%;
+  bottom: 22%;
+  left: 2%;
   animation-delay: 2s;
 }
 .float-icon-4 {
-  top: 20%;
-  left: 70%;
+  top: 22%;
+  right: 2%;
   animation-delay: 3s;
 }
 .float-icon-5 {
-  top: 60%;
-  left: 80%;
+  bottom: 22%;
+  right: 2%;
   animation-delay: 4s;
 }
 .float-icon-6 {
-  top: 30%;
-  left: 30%;
+  bottom: 2%;
+  left: 25%;
   animation-delay: 5s;
 }
 .float-icon-7 {
-  top: 50%;
-  left: 60%;
+  bottom: 2%;
+  right: 25%;
   animation-delay: 6s;
 }
 
@@ -406,13 +463,13 @@ body {
     transform: translateY(0) translateX(0) rotate(0deg);
   }
   25% {
-    transform: translateY(-20px) translateX(15px) rotate(15deg);
+    transform: translateY(-15px) translateX(10px) rotate(10deg);
   }
   50% {
-    transform: translateY(10px) translateX(-15px) rotate(-10deg);
+    transform: translateY(8px) translateX(-10px) rotate(-8deg);
   }
   75% {
-    transform: translateY(-15px) translateX(10px) rotate(5deg);
+    transform: translateY(-10px) translateX(8px) rotate(5deg);
   }
   100% {
     transform: translateY(0) translateX(0) rotate(0deg);
@@ -471,7 +528,49 @@ body {
 
 .about-content {
   display: grid;
-  gap: 3rem;
+  grid-template-columns: 320px 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.about-image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 24px;
+  padding: 5px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(99, 102, 241, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.about-image-frame:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(99, 102, 241, 0.4);
+}
+
+.about-photo {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+}
+
+.about-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .about-text {
@@ -998,9 +1097,13 @@ body {
   margin: 0.5rem 0;
 }
 
-/* ============================================
-   Responsive Design
-   ============================================ */
+@media (max-width: 992px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-menu {
     position: fixed;
@@ -1058,15 +1161,21 @@ body {
     justify-content: center;
   }
 
-  .floating-icons {
-    height: 300px;
-    margin-top: 2rem;
+  .hero-image-container {
+    width: 320px;
+    height: 320px;
+    margin-top: 1.5rem;
+  }
+
+  .profile-frame {
+    width: 200px;
+    height: 200px;
   }
 
   .float-icon {
-    width: 70px;
-    height: 70px;
-    font-size: 1.8rem;
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
   }
 
   .section-title {
